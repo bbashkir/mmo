@@ -32,6 +32,25 @@ for col in columns_to_fill:
 
 df['Stress Level'] = df['Stress Level'].astype(int)
 
+# Группировка по уровню активности
+activity_group = df.groupby('Activity Level').mean()
+print(activity_group)
+
+# Гистограмма для уровня кислорода в крови
+plt.figure(figsize=(12, 6))
+sns.histplot(df['Blood Oxygen Level (%)'], bins=30, kde=True, color='orange')
+plt.title('Распределение уровня кислорода в крови', fontsize=16)
+plt.xlabel('Уровень кислорода в крови (%)', fontsize=14)
+plt.ylabel('Количество пользователей', fontsize=14)
+plt.show()
+
+# Boxplot для уровня стресса
+plt.figure(figsize=(12, 6))
+sns.boxplot(x=df['Stress Level'], color='purple')
+plt.title('Boxplot для уровня стресса', fontsize=16)
+plt.xlabel('Уровень стресса', fontsize=14)
+plt.show()
+
 # Анализ распределения данных
 plt.figure(figsize=(12, 6))
 sns.histplot(df['Heart Rate (BPM)'], bins=50, kde=True, color='skyblue')
@@ -55,6 +74,3 @@ plt.title('Диаграмма рассеяния: Частота сердечн�
 plt.xlabel('Частота сердечных сокращений (BPM)')
 plt.ylabel('Уровень стресса')
 plt.show()
-
-# Выводы
-# На основе анализа можно сделать выводы о том, как различные показатели здоровья влияют на уровень стресса.
